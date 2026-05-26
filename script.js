@@ -17,7 +17,6 @@ let imagesLoaded = 0;
 const images = [];
 const sequence = { frame: frameCount - 1 }; 
 
-// Bandera para controlar la animación de las estelas
 let lightTrailsActive = false;
 
 const imageLoad = () => {
@@ -37,7 +36,7 @@ for (let i = 0; i < frameCount; i++) {
   images.push(img);
 }
 
-// INICIALIZACIÓN DE LA APP (cuando todo está cargado)
+// INICIALIZACIÓN DE LA APP
 function initApp() {
     gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => {
         preloader.style.display = 'none';
@@ -56,15 +55,15 @@ function initApp() {
     });
 
     render();
-    setupScrollAnimations();
     initLightTrails(); 
+    setupScrollAnimations();
 }
 
-// Animaciones y render
+// RENDERIZADO DEL CANVAS PRINCIPAL
 function render() {
   const frameIndex = Math.round(sequence.frame);
+  if (!images[frameIndex] || !images[frameIndex].complete) return;
   const img = images[frameIndex];
-  if (!img || !img.complete) return;
 
   const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
   const x = (canvas.width / 2) - (img.width / 2) * scale;
@@ -74,6 +73,7 @@ function render() {
   context.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
+// ANIMACIONES DE SCROLL (GSAP)
 function setupScrollAnimations() {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -81,18 +81,21 @@ function setupScrollAnimations() {
         frame: 0,
         snap: "frame",
         ease: "none",
+        onUpdate: render, 
         scrollTrigger: {
             trigger: "#hero",
             start: "center center",
             end: "+=200%",
             scrub: 1.5,
             pin: true,
-        },
-        onUpdate: () => {
-            render();
-            // Activar las estelas de luz cuando la animación del hero termina (frame 0)
-            if (Math.round(sequence.frame) === 0 && !lightTrailsActive) {
-                lightTrailsActive = true;
+            onLeaveBack: () => { 
+                if (!lightTrailsActive) {
+                    lightTrailsActive = true;
+                    window.initParticles();
+                }
+            },
+            onEnter: () => { 
+                lightTrailsActive = false;
             }
         }
     });
@@ -116,13 +119,12 @@ function setupScrollAnimations() {
     });
 }
 
-// LÓGICA PARA ESTELAS EFECTO
+// LÓGICA PARA PARTÍCULAS
 function initLightTrails() {
     const bgCanvas = document.getElementById('background-canvas');
     const bgCtx = bgCanvas.getContext('2d');
-
-    let width, height;
     let particles = [];
+    let width, height;
 
     const particleConfig = {
         count: 75,
@@ -130,7 +132,10 @@ function initLightTrails() {
         maxSpeed: 2.5,
         minSize: 2,
         maxSize: 3,
-        colors:  ['#0044ff', '#ff2200', '#aa00ff', '#ff4dd8']
+        colors:  ['#0044ff', '#ff2200', '#aa00ff', '#ff4dd8'],
+        // --- PARÁMETROS SENCILLOS PARA LA EXPLOSIÓN ---
+        explosionFactor: 15, // Qué tan fuerte es la explosión. Prueba entre 5 y 30.
+        drag: 0.96 // Qué tan rápido frenan. Más cercano a 1, frenan más lento. Prueba entre 0.92 y 0.98.
     };
 
     function resizeCanvas() {
@@ -140,17 +145,23 @@ function initLightTrails() {
 
     function createParticle() {
         const color = particleConfig.colors[Math.floor(Math.random() * particleConfig.colors.length)];
+        
+        const normalVx = (Math.random() * particleConfig.maxSpeed) - (particleConfig.maxSpeed / 2);
+        const normalVy = -(Math.random() * (particleConfig.maxSpeed - particleConfig.minSpeed) + particleConfig.minSpeed);
+
         return {
-            x: width / 2, // Origen: centro horizontal
-            y: height,    // Origen: borde inferior
-            vx: (Math.random() * particleConfig.maxSpeed) - (particleConfig.maxSpeed / 2), // Velocidad horizontal aleatoria para dispersión
-            vy: -(Math.random() * (particleConfig.maxSpeed - particleConfig.minSpeed) + particleConfig.minSpeed), // Velocidad vertical siempre hacia arriba
+            x: width / 2, 
+            y: height,    
+            vx: normalVx * particleConfig.explosionFactor, // Velocidad inicial multiplicada
+            vy: normalVy * particleConfig.explosionFactor, // Velocidad inicial multiplicada
+            normalVx: normalVx, // Guardamos la velocidad normal para después
+            normalVy: normalVy,
             size: Math.random() * (particleConfig.maxSize - particleConfig.minSize) + particleConfig.minSize,
             color: color
         };
     }
-
-    function initParticles() {
+    
+    window.initParticles = function() {
         particles = [];
         for (let i = 0; i < particleConfig.count; i++) {
             particles.push(createParticle());
@@ -159,19 +170,28 @@ function initLightTrails() {
 
     function animate() {
         requestAnimationFrame(animate);
-
-        // Solo dibujar si la animación principal ha terminado
+    
         if (lightTrailsActive) {
             bgCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             bgCtx.fillRect(0, 0, width, height);
-
+    
             particles.forEach(p => {
+                // Aplicar freno (drag) si la partícula es más rápida que su velocidad normal
+                const currentSpeedSq = p.vx * p.vx + p.vy * p.vy;
+                const normalSpeedSq = p.normalVx * p.normalVx + p.normalVy * p.normalVy;
+                if (currentSpeedSq > normalSpeedSq) {
+                    p.vx *= particleConfig.drag;
+                    p.vy *= particleConfig.drag;
+                }
+
                 p.x += p.vx;
                 p.y += p.vy;
 
-                // Si la partícula sale de la pantalla (por arriba, izquierda o derecha),reiniciamos
-                if (p.y < 0 || p.x < 0 || p.x > width) {
-                    Object.assign(p, createParticle());
+                if ((p.x >= width - p.size && p.vx > 0) || (p.x <= p.size && p.vx < 0)) {
+                    p.vx *= -1;
+                }
+                if ((p.y >= height - p.size && p.vy > 0) || (p.y <= p.size && p.vy < 0)) {
+                    p.vy *= -1;
                 }
 
                 bgCtx.fillStyle = p.color;
@@ -179,18 +199,18 @@ function initLightTrails() {
                 bgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 bgCtx.fill();
             });
+        } else {
+            bgCtx.clearRect(0, 0, width, height);
         }
     }
 
     window.addEventListener('resize', () => {
         resizeCanvas();
-        // Si las estelas ya están activas, reinicio las partículas para que se adapten al nuevo tamaño
         if (lightTrailsActive) {
-            initParticles();
+            window.initParticles();
         }
     });
 
     resizeCanvas();
-    initParticles(); // Prepara las partículas, pero aún no son visibles
-    animate();       // Inicia el bucle de animación
+    animate();
 }

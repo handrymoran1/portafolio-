@@ -19,7 +19,7 @@ La aplicación presenta una navegación inversa ("scroll-up"), donde el usuario 
 -   **Animaciones de UI con GSAP:** Se utiliza la librería `GSAP` (GreenSock Animation Platform) y su plugin `ScrollTrigger` para:
     -   Fijar la sección del `hero` mientras dura la animación (`pin`).
     -   Controlar el frame de la animación basado en la posición del scroll (`scrub`).
-    -   Animar la aparición del contenido de las secciones a medida que el usuario se desplaza.
+    -   [COMPLETADO] Animar la aparición del contenido de las secciones a medida que el usuario se desplaza.
 -   **Diseño Totalmente Responsivo:** La interfaz se adapta correctamente a diferentes tamaños de pantalla, desde móviles hasta ordenadores de escritorio.
 
 ---
