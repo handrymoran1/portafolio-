@@ -1,75 +1,121 @@
- 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Handry Moran | Portafolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Handry Morán — Full Stack Java Developer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <nav>
-        <div class="logo">HM</div>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#sobre-mi">Sobre mí</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav>
 
-    <header id="inicio">
-        <h1>Handry David Moran Garcia</h1>
-        <p class="slogan">Desarrolladora Full Stack Junior | Apasionada por la tecnología y sus aplicaciones</p>
-        <div class="social-icons">
-            <a href="https://github.com/handrymoran1" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/handry-moran-14518320b" target="_blank"><i class="fab fa-linkedin"></i></a>
+<canvas id="background-canvas" style="position: fixed; top: 0; left: 0; z-index: 0; background-color: #000000;"></canvas>
+
+<div id="preloader">
+  <div class="preloader-text">Cargando frames...</div>
+</div>
+
+<div id="content-wrapper" style="visibility: hidden;">
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="contact-inner reveal">
+        <p class="section-label">Hablemos</p>
+        <h2 class="contact-title">¿Tienes un proyecto<br>en mente?</h2>
+        <p class="contact-sub">Estoy disponible para freelance, colaboraciones y posiciones full-time.</p>
+        <div class="contact-links">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=handrymoran1@gmail.com" target="_blank" class="contact-link"><iconify-icon icon="tabler:mail-filled"></iconify-icon><span>GMAIL</span></a>
+          <a href="https://www.linkedin.com/in/handry-moran-14518320b" target="_blank" class="contact-link"><iconify-icon icon="brandico:linkedin-rect"></iconify-icon><span>LinkedIn</span></a>
+          <a href="https://github.com/handrymoran1" target="_blank" class="contact-link"><iconify-icon icon="bi:github"></iconify-icon><span>GitHub</span></a>
         </div>
-    </header>
+        <a href="https://wa.me/qr/OTV6KUZL7ZJRM1" target="_blank" class="btn btn--primary btn--large"><iconify-icon icon="logos:whatsapp-icon"></iconify-icon> WhatsApp</a>
+      </div>
+    </div>
+  </section>
 
-    <section id="sobre-mi">
-        <h2>Sobre mí</h2>
-        <p>Decidí aprender programación porque siempre me ha llamado la atención desde que era niña. Pienso que la tecnología es el futuro y nunca pasará de moda; al contrario, la programación es la base de lo que viene.</p>
-        <div class="skills">
-            <h3>Habilidades Técnicas</h3>
-            <ul>
-                <li><i class="fab fa-js"></i> JavaScript</li>
-                <li><i class="fab fa-python"></i> Python</li>
-                <li><i class="fab fa-html5"></i> HTML5</li>
-                <li><i class="fab fa-css3-alt"></i> CSS3 / Bootstrap</li>
-            </ul>
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <p class="section-label">Proyectos</p>
+      <h2 class="section-title reveal">Lo que he<br><em>construido.</em></h2>
+      <div class="projects-grid">
+        <article class="project-card reveal" data-index="01">
+          <div class="project-card__header"><span class="project-card__num">01</span><div class="project-card__links"><a href="https://github.com/handrymoran1" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
+          <h3>API RESTful para E-commerce</h3>
+          <p>API REST con Spring Boot, autenticación JWT y PostgreSQL. Arquitectura limpia con separación de capas.</p>
+          <div class="project-card__tags"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></div>
+        </article>
+        <article class="project-card reveal" data-index="02">
+          <div class="project-card__header"><span class="project-card__num">02</span><div class="project-card__links"><a href="https://github.com/handrymoran1" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
+          <h3>Dashboard de Visualización</h3>
+          <p>SPA en React con consumo de API externa, manejo de estado global y diseño responsive.</p>
+          <div class="project-card__tags"><span>React</span><span>JavaScript</span><span>REST API</span></div>
+        </article>
+        <article class="project-card reveal" data-index="03">
+          <div class="project-card__header"><span class="project-card__num">03</span><div class="project-card__links"><a href="https://github.com/handrymoran1" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
+          <h3>ETL de Datos con Python</h3>
+          <p>Microservicio en Python para procesamiento de datos con Docker y despliegue en la nube.</p>
+          <div class="project-card__tags"><span>Python</span><span>Docker</span><span>Cloud</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <div class="container">
+      <p class="section-label">Sobre mí</p>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <h2 class="section-title">Construyo Software<br><em>A otro nivel.</em></h2>
+          <p>Soy un Desarrollador Full Stack Java con una fuerte inclinación y pasión por el Desarrollo Front-End. Me especializo en fusionar la arquitectura lógica y robusta del backend, usando Java y Spring Boot, con interfaces de usuario dinámicas e interactivas construidas en React.</p>
+          <div class="about-cta"><a href="assets/Handry_Moran_CV.pdf" class="btn btn--primary" download><iconify-icon icon="material-symbols:download"></iconify-icon> Descargar CV</a><a href="https://mail.google.com/mail/?view=cm&fs=1&to=handrymoran1@gmail.com" target="_blank" class="btn btn--ghost"><iconify-icon icon="tabler:mail-filled"></iconify-icon> Contactar</a></div>
         </div>
-    </section>
-
-    <section id="proyectos">
-        <h2>Proyectos</h2>
-        <div class="grid-proyectos">
-            <div class="card">
-                <h3>Huellas de la Pola</h3>
-                <p>Proyecto colaborativo gestionado con Git y metodologías ágiles. Enfocado en el trabajo en equipo y control de versiones.</p>
-                <span class="tech">Git | GitHub | HTML | CSS</span>
-            </div>
-            <div class="card">
-                <h3>Pokedex</h3>
-                <p>Aplicación que consume una API de Pokémon para mostrar estadísticas y datos en tiempo real usando lógica de programación.</p>
-                <span class="tech">JavaScript | API Rest</span>
-            </div>
-            <div class="card">
-                <h3>Task Manager</h3>
-                <p>Gestor de tareas interactivo para organizar actividades diarias con una interfaz limpia y funcional.</p>
-                <span class="tech">JavaScript | HTML | CSS</span>
-            </div>
+        <div class="about-tech-grid">
+          <div class="tech-card-about"><iconify-icon icon="logos:java"></iconify-icon><span>Java</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:spring-icon"></iconify-icon><span>Spring</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:python"></iconify-icon><span>Python</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:javascript"></iconify-icon><span>JavaScript</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:postgresql"></iconify-icon><span>PostgreSQL</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:html-5"></iconify-icon><span>HTML5</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:css-3"></iconify-icon><span>CSS</span></div>
+          <div class="tech-card-about"><iconify-icon icon="logos:git-icon"></iconify-icon><span>Git</span></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <footer id="contacto">
-        <h2>Contacto</h2>
-        <p>¿Tienes un proyecto en mente? ¡Hablemos!</p>
-        <a href="mailto:handrymoran1@gmail.com" class="btn-correo">Enviar Correo</a>
-        <p class="footer-text">© 2026 Handry Moran - Desarrollado con ❤️</p>
-    </footer>
+  <footer class="footer">
+      <span>© 2024 Handry Morán</span>
+      <span>Diseñado &amp; desarrollado con <3 </span>
+  </footer>
 
-    <script src="script.js"></script>
+</div>
+
+<section id="hero" class="hero" style="visibility: hidden;">
+  <div class="hero-overlay-text">
+    <p class="hero-label">Full Stack Java Developer</p>
+    <h1 class="hero-name">HANDRY<br>MORÁN</h1>
+  </div>
+   <div class="hero-overlay-text-right">
+    <h1 class="hero-label-right">OBJETIVO</h1>
+    <p class="hero-paragraph">Mi objetivo es transformar ideas complejas en aplicaciones web estables, escalables y visualmente atractivas. Me apasiona aprender de las nuevas tecnologías y su aplicación, como la IA por ejemplo. Actualmente estoy abierto a nuevas oportunidades, tanto en remoto como presencial.</p>
+  </div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="scroll-hint">
+    <span class="scroll-hint__text">SCROLL UP</span>
+    <span class="scroll-hint__line"></span>
+  </div>
+</section>
+
+<script src="script.js"></script>
+
+<div id="page-bottom-anchor"></div>
+
 </body>
 </html>
