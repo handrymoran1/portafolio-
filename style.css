@@ -53,26 +53,12 @@ iconify-icon {
 
 
 /* ESTRUCTURA (SIMPLIFICADA) */
-#hero {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  z-index: 1; 
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;           
-  gap: clamp(20px, 5vw, 80px); 
-  box-sizing: border-box;
-}
-
-#hero .container {
-  padding: 0 clamp(20px, 5vw, 60px);
-}
-
 #content-wrapper {
   background-color: transparent;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /*UTILIDADES */
@@ -157,19 +143,33 @@ iconify-icon {
 /*HERO & CANVAS */
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; object-fit: cover; }
 
+#hero {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
 .hero-overlay-text {
-  width: clamp(280px, 25vw, 380px); 
-  padding: clamp(24px, 4vw, 56px);
+  position: absolute;
   z-index: 10;
   pointer-events: none;
-  margin-right: 500px; 
+  left: clamp(24px, 4vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(280px, 25vw, 380px);
 }
 
 .hero-overlay-text-right {
-  width: clamp(260px, 30vw, 420px);
-  padding: clamp(24px, 5vw, 56px);
+  position: absolute;
   z-index: 10;
-  padding-top: 50px;
+  right: clamp(24px, 4vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  /* FIX FINAL: Reemplazo de clamp por max-width para un control estricto */
+  max-width: 280px;
+  width: 100%; /* Asegura que no se desborde del max-width */
+  padding: 0; /* El padding se gestiona en la media query para móvil */
 }
 
 .hero-label {
@@ -191,7 +191,6 @@ iconify-icon {
   color: var(--accent);
   margin-bottom: 6px;
   font-weight: 700;
-  margin-top: 2;
 }
 
 .hero-name {
@@ -228,28 +227,35 @@ iconify-icon {
 /* RESPONSIVE*/
 @media (max-width: 992px) {
     #hero {
+        display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         padding-top: 80px;
         padding-bottom: 80px;
     }
 
     .hero-overlay-text {
-        margin-right: 0;
+        position: static;
+        transform: none;
         text-align: center;
+        width: auto;
+        padding: 16px;
     }
 
     .hero-overlay-text-right {
-        position: relative;
-        width: 85%;
+        position: static;
+        transform: none;
+        width: 85%; /* Se restaura el width para la vista móvil */
         max-width: 500px;
         text-align: center;
         top: auto;
         left: auto;
-        transform: none;
+        right: auto;
         background-color: rgba(0, 0, 0, 0.1) !important;
-        padding: 24px;
+        padding: 24px; /* Restaurar padding para la vista móvil */
         border-radius: 12px;
+        margin-top: 24px;
     }
 
     .hero-paragraph {
@@ -276,7 +282,6 @@ iconify-icon {
   .projects-grid { grid-template-columns: 1fr; }
   .contact-link { max-width: 100%; }
   .about-tech-grid { grid-template-columns: repeat(3, 1fr); }
-  .hero-overlay-text-right { display: block; }
 }
 @media (max-width: 480px) {
   .footer { flex-direction: column; text-align: center; }

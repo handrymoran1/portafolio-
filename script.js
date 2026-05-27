@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('hero-canvas');
 const context = canvas.getContext('2d');
 
@@ -7,21 +8,26 @@ const preloaderText = document.querySelector('.preloader-text');
 const contentWrapper = document.getElementById('content-wrapper');
 const heroSection = document.getElementById('hero');
 
-const frameCount = 270;
+// --- OPTIMIZACIÓN: Reducimos el número de frames a la mitad ---
+const totalOriginalFrames = 270; // El número original de imágenes
+const frameCount = Math.ceil(totalOriginalFrames / 2); // Cargamos la mitad, redondeando hacia arriba
+
 const currentFrame = index => (
-  `assets/frames/frames${index.toString().padStart(8, '0')}.png`
+  // Mapeamos el índice del bucle (0, 1, 2...) al índice real del archivo (0, 2, 4...)
+  `assets/frames/frames${(index * 2).toString().padStart(8, '0')}.png`
 );
 
-// LÓGICA DE PRECARGA 
+// LÓGICA DE PRECARGA
 let imagesLoaded = 0;
 const images = [];
-const sequence = { frame: frameCount - 1 }; 
+// El frame inicial ahora es el último del nuevo conteo
+const sequence = { frame: frameCount - 1 };
 
 let lightTrailsActive = false;
 
 const imageLoad = () => {
     imagesLoaded++;
-    const progress = Math.floor((imagesLoaded / frameCount) * 100);
+    // Actualizamos el texto del precargador con el nuevo conteo
     preloaderText.textContent = `Cargando ${imagesLoaded} / ${frameCount}`;
 
     if (imagesLoaded === frameCount) {
@@ -29,14 +35,15 @@ const imageLoad = () => {
     }
 };
 
+// El bucle ahora itera hasta el nuevo frameCount
 for (let i = 0; i < frameCount; i++) {
   const img = new Image();
-  img.src = currentFrame(i);
+  img.src = currentFrame(i); // currentFrame ahora se encarga de coger la imagen correcta
   img.onload = imageLoad;
   images.push(img);
 }
 
-// INICIALIZACIÓN DE LA APP
+// INICIALIZACIÓN DE LA APP (sin cambios)
 function initApp() {
     gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => {
         preloader.style.display = 'none';
@@ -55,12 +62,13 @@ function initApp() {
     });
 
     render();
-    initLightTrails(); 
+    initLightTrails();
     setupScrollAnimations();
 }
 
-// RENDERIZADO DEL CANVAS PRINCIPAL
+// RENDERIZADO DEL CANVAS PRINCIPAL (sin cambios)
 function render() {
+  // sequence.frame va de (frameCount - 1) a 0. Esto mapea directamente al array 'images'
   const frameIndex = Math.round(sequence.frame);
   if (!images[frameIndex] || !images[frameIndex].complete) return;
   const img = images[frameIndex];
@@ -77,24 +85,25 @@ function render() {
 function setupScrollAnimations() {
     gsap.registerPlugin(ScrollTrigger);
 
+    // La animación de GSAP sigue funcionando igual, pero sobre un rango menor de frames
     gsap.to(sequence, {
         frame: 0,
         snap: "frame",
         ease: "none",
-        onUpdate: render, 
+        onUpdate: render,
         scrollTrigger: {
             trigger: "#hero",
-            start: "center center",  
-            end: "+=200%",
+            start: "center center",
+            end: "+=200%", // Mantenemos la misma distancia de scroll
             scrub: 1.5,
             pin: true,
-            onLeaveBack: () => { 
+            onLeaveBack: () => {
                 if (!lightTrailsActive) {
                     lightTrailsActive = true;
                     window.initParticles();
                 }
             },
-            onEnter: () => { 
+            onEnter: () => {
                 lightTrailsActive = false;
             }
         }
@@ -102,16 +111,16 @@ function setupScrollAnimations() {
 
     const revealElements = document.querySelectorAll(".reveal");
     revealElements.forEach((el) => {
-        gsap.fromTo(el, 
-            { opacity: 0, y: 50 }, 
+        gsap.fromTo(el,
+            { opacity: 0, y: 50 },
             {
-                opacity: 1, 
+                opacity: 1,
                 y: 0,
                 duration: 1,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%", 
+                    start: "top 85%",
                     toggleActions: "play none none none"
                 }
             }
@@ -119,7 +128,7 @@ function setupScrollAnimations() {
     });
 }
 
-// LÓGICA PARA PARTÍCULAS
+// LÓGICA PARA PARTÍCULAS (sin cambios)
 function initLightTrails() {
     const bgCanvas = document.getElementById('background-canvas');
     const bgCtx = bgCanvas.getContext('2d');
@@ -133,9 +142,8 @@ function initLightTrails() {
         minSize: 2,
         maxSize: 6,
         colors:  ['#0044ff', '#ff2200', '#aa00ff', '#ff4dd8'],
-        // --- PARÁMETROS SENCILLOS PARA LA EXPLOSIÓN ---
-        explosionFactor: 15, // Qué tan fuerte es la explosión. Prueba entre 5 y 30.
-        drag: 0.96 // Qué tan rápido frenan. Más cercano a 1, frenan más lento. Prueba entre 0.92 y 0.98.
+        explosionFactor: 15,
+        drag: 0.96
     };
 
     function resizeCanvas() {
@@ -150,11 +158,11 @@ function initLightTrails() {
         const normalVy = -(Math.random() * (particleConfig.maxSpeed - particleConfig.minSpeed) + particleConfig.minSpeed);
 
         return {
-            x: width / 2, 
-            y: height,    
-            vx: normalVx * particleConfig.explosionFactor, // Velocidad inicial multiplicada
-            vy: normalVy * particleConfig.explosionFactor, // Velocidad inicial multiplicada
-            normalVx: normalVx, // Guardamos la velocidad normal para después
+            x: width / 2,
+            y: height,
+            vx: normalVx * particleConfig.explosionFactor,
+            vy: normalVy * particleConfig.explosionFactor,
+            normalVx: normalVx,
             normalVy: normalVy,
             size: Math.random() * (particleConfig.maxSize - particleConfig.minSize) + particleConfig.minSize,
             color: color
@@ -176,7 +184,6 @@ function initLightTrails() {
             bgCtx.fillRect(0, 0, width, height);
     
             particles.forEach(p => {
-                // Aplicar freno (drag) si la partícula es más rápida que su velocidad normal
                 const currentSpeedSq = p.vx * p.vx + p.vy * p.vy;
                 const normalSpeedSq = p.normalVx * p.normalVx + p.normalVy * p.normalVy;
                 if (currentSpeedSq > normalSpeedSq) {
