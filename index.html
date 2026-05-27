@@ -24,7 +24,7 @@
 
 <div id="content-wrapper">
 
-  <section id="contact" class="contact-section">
+  <section id="contact" class="contact-section" role="contentinfo">
     <div class="container">
       <div class="contact-inner reveal">
         <p class="section-label">Hablemos</p>
@@ -40,72 +40,144 @@
     </div>
   </section>
 
-  <section id="projects" class="projects-section">
-    <div class="container">
-      <p class="section-label">Proyectos</p>
-      <h2 class="section-title reveal">Lo que he<br><em>construido.</em></h2>
-      <div class="projects-grid">
-        <article class="project-card reveal" data-index="01">
-          <div class="project-card__header"><span class="project-card__num">Terra Viva</span><div class="project-card__links"><a href="https://github.com/handrymoran1/huellas_de_la_pola" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
-          <h3>API RESTful para E-commerce</h3>
-          <p>API REST con Spring Boot, autenticación JWT y PostgreSQL. Arquitectura limpia con separación de capas.</p>
-          <div class="project-card__tags"><span>Java</span><span>Spring Boot</span><span>PostgreSQL</span></div>
-        </article>
-        <article class="project-card reveal" data-index="02">
-          <div class="project-card__header"><span class="project-card__num">02</span><div class="project-card__links"><a href="https://github.com/handrymoran1" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
-          <h3>Dashboard de Visualización</h3>
-          <p>SPA en React con consumo de API externa, manejo de estado global y diseño responsive.</p>
-          <div class="project-card__tags"><span>React</span><span>JavaScript</span><span>REST API</span></div>
-        </article>
-        <article class="project-card reveal" data-index="03">
-          <div class="project-card__header"><span class="project-card__num">03</span><div class="project-card__links"><a href="https://github.com/handrymoran1" target="_blank" aria-label="GitHub"><iconify-icon icon="bi:github"></iconify-icon></a><a href="#" aria-label="Demo"><iconify-icon icon="ph:arrow-square-out-bold"></iconify-icon></a></div></div>
-          <h3>ETL de Datos con Python</h3>
-          <p>Microservicio en Python para procesamiento de datos con Docker y despliegue en la nube.</p>
-          <div class="project-card__tags"><span>Python</span><span>Docker</span><span>Cloud</span></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="about-section">
-    <div class="container">
-      <p class="section-label">Sobre mí</p>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <h2 class="section-title">Construyo Software<br><em>A otro nivel.</em></h2>
-          <p>Soy un Desarrollador Full Stack Java con una fuerte inclinación y pasión por el Desarrollo Front-End. Me especializo en fusionar la arquitectura lógica y robusta del backend, usando Java y Spring Boot, con interfaces de usuario dinámicas e interactivas.</p>
-          <div class="about-cta"><a href="assets/Handry_Moran_CV.pdf" class="btn btn--primary" download><iconify-icon icon="material-symbols:download"></iconify-icon> Descargar CV</a><a href="https://mail.google.com/mail/?view=cm&fs=1&to=handrymoran1@gmail.com" target="_blank" class="btn btn--ghost"><iconify-icon icon="tabler:mail-filled"></iconify-icon> Contactar</a></div>
+  <main id="main-content" role="main">
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <p class="section-label">Proyectos</p>
+        <h2 class="section-title reveal">Lo que he<br><em>construido.</em></h2>
+        <div class="projects-grid">
+           <article class="project-card reveal" data-index="01">
+            <div class="project-card__header">
+              <span class="project-card__num">01</span>
+              <div class="project-card__links">
+                <a href="https://github.com/jcqj/GenCOL_HACKATON" target="_blank" aria-label="GitHub">
+                  <iconify-icon icon="bi:github"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <h3>Gestión de Clínica (Hackathon en 9 Horas)</h3>
+            <p>En un intenso hackathon de 9 horas, me sumergí en el desarrollo del backend para un sistema de gestión de clínica. Mi rol específico fue la capa de persistencia de datos. Afrontando por primera vez el reto de leer y procesar datos desde archivos CSV en Java, diseñé y construí la solución que sirvió de base para toda la lógica de negocio de la aplicación. Este proyecto demuestra mi capacidad para aprender sobre la marcha, colaborar en un entorno de código compartido y entregar componentes funcionales bajo una estricta fecha límite.</p>
+            <div class="project-card__tags">
+              <span>Java</span>
+              <span>Persistencia de Datos</span>
+              <span>CSV</span>
+              <span>Hackathon</span>
+              <span>Aprendizaje Rápido</span>
+            </div>
+          </article>
+          <article class="project-card reveal" data-index="02">
+            <div class="project-card__header">
+              <span class="project-card__num">02</span>
+              <div class="project-card__links">
+                <a href="https://github.com/handrymoran1/api_nasa" target="_blank" aria-label="GitHub">
+                  <iconify-icon icon="bi:github"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <h3>Visor de Imágenes de la NASA</h3>
+            <p>Desarrollé una aplicación web interactiva que se conecta a la API de la NASA para obtener y mostrar la "Imagen Astronómica del Día". Este proyecto demuestra mi habilidad para consumir APIs RESTful de terceros, manejar respuestas asíncronas con Fetch, y manipular dinámicamente el DOM para presentar los datos al usuario de una manera atractiva y accesible.</p>
+            <div class="project-card__tags"><span>JavaScript</span><span>API REST</span><span>Fetch</span></div>
+          </article>
+          <article class="project-card reveal" data-index="03">
+            <div class="project-card__header">
+              <span class="project-card__num">03</span>
+              <div class="project-card__links">
+                  <a href="https://github.com/handrymoran1/PruebasUnitariasConJUnit-5" target="_blank" aria-label="GitHub">
+                  <iconify-icon icon="bi:github"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <h3>Simulador Bancario con Java</h3>
+            <p>Diseñé y desarrollé la arquitectura backend para un sistema de simulación bancaria, aplicando principios SOLID y de Programación Orientada a Objetos en Java. Me enfocado en la lógica de negocio para procesar transacciones complejas de forma segura, asegurando la integridad y consistencia de los datos.</p>
+            <div class="project-card__tags"><span>Java</span><span>POO</span><span>SOLID</span><span>Arquitectura</span></div>
+          </article>
+          <article class="project-card reveal" data-index="04">
+            <div class="project-card__header">
+              <span class="project-card__num">04</span>
+              <div class="project-card__links">
+                <a href="https://github.com/handrymoran1/huellas_de_la_pola" target="_blank" aria-label="GitHub">
+                  <iconify-icon icon="bi:github"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <h3>Terra Viva (Proyecto Full-Stack)</h3>
+            <p>Como parte del equipo de desarrollo de "Terra Viva", una plataforma de reservas hoteleras, tuve un rol integral. Participé en la construcción del front-end con HTML, CSS y JS, y también en el back-end, donde diseñé y probé la API REST con Postman, y gestioné la base de datos en PostgreSQL para el manejo de usuarios y reservas.</p>
+            <div class="project-card__tags">
+              <span>Full-Stack</span>
+              <span>API REST</span>
+              <span>PostgreSQL</span>
+              <span>JavaScript</span>
+              <span>Postman</span>
+              <span>Trabajo en Equipo</span>
+            </div>
+          </article>
+          <article class="project-card reveal" data-index="05">
+            <div class="project-card__header">
+              <span class="project-card__num">05</span>
+              <div class="project-card__links">
+                <a href="https://github.com/HernanVasquezDev/blog-increible" target="_blank" aria-label="GitHub">
+                  <iconify-icon icon="bi:github"></iconify-icon>
+                </a>
+              </div>
+            </div>
+            <h3>Blog para Fans (Colaborativo)</h3>
+            <p>En equipo, dimos vida a un blog para fans. Participé en la maquetación del contenido y el diseño visual, usando HTML y CSS para crear una experiencia de usuario atractiva y bien estructurada.</p>
+            <div class="project-card__tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>Colaboración</span>
+              <span>Diseño Web</span>
+            </div>
+          </article>
         </div>
-        <div class="about-tech-grid">
-          <div class="tech-card-about"><iconify-icon icon="logos:java"></iconify-icon><span>Java</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:spring-icon"></iconify-icon><span>Spring</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:python"></iconify-icon><span>Python</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:javascript"></iconify-icon><span>JavaScript</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:postgresql"></iconify-icon><span>PostgreSQL</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:html-5"></iconify-icon><span>HTML5</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:css-3"></iconify-icon><span>CSS</span></div>
-          <div class="tech-card-about"><iconify-icon icon="logos:git-icon"></iconify-icon><span>Git</span></div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="container">
+        <p class="section-label">Sobre mí</p>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <h2 class="section-title">Construyo Software<br><em>A otro nivel.</em></h2>
+            <p>Soy un Desarrollador Full Stack Java con una fuerte inclinación y pasión por el Desarrollo Front-End. Me especializo en fusionar la arquitectura lógica y robusta del backend, usando Java y Spring Boot, con interfaces de usuario dinámicas e interactivas.</p>
+            <div class="about-cta"><a href="assets/Handry_Moran_CV.pdf" class="btn btn--primary" download><iconify-icon icon="material-symbols:download"></iconify-icon> Descargar CV</a><a href="https://mail.google.com/mail/?view=cm&fs=1&to=handrymoran1@gmail.com" target="_blank" class="btn btn--ghost"><iconify-icon icon="tabler:mail-filled"></iconify-icon> Contactar</a></div>
+          </div>
+          <div class="about-tech-grid">
+            <div class="tech-card-about"><iconify-icon icon="logos:java"></iconify-icon><span>Java</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:spring-icon"></iconify-icon><span>Spring</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:python"></iconify-icon><span>Python</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:javascript"></iconify-icon><span>JavaScript</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:postgresql"></iconify-icon><span>PostgreSQL</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:html-5"></iconify-icon><span>HTML5</span></div>
+            <div class="tech-card-about"><iconify-icon icon="vscode-icons:file-type-css"></iconify-icon><span>CSS</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:git-icon"></iconify-icon><span>Git</span></div>
+            <div class="tech-card-about"><iconify-icon icon="devicon:github"></iconify-icon><span>GitHub</span></div>
+            <div class="tech-card-about"><iconify-icon icon="logos:postman"></iconify-icon><span>Postman</span></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </main>
 
-<section id="hero" class="hero" style="visibility: hidden;">
-  <div class="hero-overlay-text">
-    <p class="hero-label">Full Stack Java Developer</p>
-    <h1 class="hero-name">HANDRY<br>MORÁN</h1>
-  </div>
-   <div class="hero-overlay-text-right">
-    <h1 class="hero-label-right">OBJETIVO</h1>
-    <p class="hero-paragraph">Mi objetivo es transformar ideas complejas en aplicaciones web estables, escalables y visualmente atractivas. Me apasiona aprender de las nuevas tecnologías y su aplicación, como la IA por ejemplo. Actualmente estoy abierto a nuevas oportunidades, tanto en remoto como presencial.</p>
-  </div>
-  <canvas id="hero-canvas"></canvas>
-  <div class="scroll-hint">
-    <span class="scroll-hint__text">SCROLL UP</span>
-    <span class="scroll-hint__line"></span>
-  </div>
-</section>
+  <header role="banner">
+    <section id="hero" class="hero" style="visibility: hidden;">
+      <div class="hero-overlay-text">
+        <p class="hero-label">Full Stack Java Developer</p>
+        <h1 class="hero-name">HANDRY<br>MORÁN</h1>
+      </div>
+       <div class="hero-overlay-text-right">
+        <h1 class="hero-label-right">OBJETIVO</h1>
+        <p class="hero-paragraph">Mi objetivo es transformar ideas complejas en aplicaciones web estables, escalables y visualmente atractivas. Me apasiona aprender de las nuevas tecnologías y su aplicación, como la IA por ejemplo. Actualmente estoy abierto a nuevas oportunidades, tanto en remoto como presencial.</p>
+      </div>
+      <canvas id="hero-canvas"></canvas>
+      <div class="scroll-hint">
+        <span class="scroll-hint__text">SCROLL UP</span>
+        <span class="scroll-hint__line"></span>
+      </div>
+    </section>
+  </header>
+
+</div> 
 
 <script src="script.js"></script>
 

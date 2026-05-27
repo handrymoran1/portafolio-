@@ -84,7 +84,7 @@ function setupScrollAnimations() {
         onUpdate: render, 
         scrollTrigger: {
             trigger: "#hero",
-            start: "center center",
+            start: "center center",  
             end: "+=200%",
             scrub: 1.5,
             pin: true,
@@ -129,9 +129,9 @@ function initLightTrails() {
     const particleConfig = {
         count: 75,
         minSpeed: 1,
-        maxSpeed: 2.5,
+        maxSpeed: 3,
         minSize: 2,
-        maxSize: 3,
+        maxSize: 6,
         colors:  ['#0044ff', '#ff2200', '#aa00ff', '#ff4dd8'],
         // --- PARÁMETROS SENCILLOS PARA LA EXPLOSIÓN ---
         explosionFactor: 15, // Qué tan fuerte es la explosión. Prueba entre 5 y 30.
