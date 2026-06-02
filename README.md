@@ -3,8 +3,8 @@
 
 Este repositorio contiene el código fuente de mi portafolio personal, una aplicación web de una sola página (SPA) diseñada para mostrar mis habilidades como Desarrollador Full Stack. El objetivo principal fue crear una experiencia de usuario memorable y diferenciadora, utilizando una navegación inversa ("scroll-up") y animaciones inmersivas controladas por el usuario.
 
-**Puedes ver la versión en vivo aquí[handrymoran.com]
-https://portafolio--48502081-381f9.web.app 
+Puedes ver la versión en vivo aquí[handrymoran.com]
+https://portafolio--48502081-381f9.web.app
 
 ### Funcionalidades
 
