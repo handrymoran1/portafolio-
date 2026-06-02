@@ -166,9 +166,9 @@ iconify-icon {
   right: clamp(24px, 4vw, 56px);
   top: 50%;
   transform: translateY(-50%);
-  /* FIX FINAL: Reemplazo de clamp por max-width para un control estricto */
+
   max-width: 280px;
-  width: 100%; /* Asegura que no se desborde del max-width */
+  width: 100%; 
   padding: 0; /* El padding se gestiona en la media query para móvil */
 }
 
@@ -205,7 +205,7 @@ iconify-icon {
 }
 
 .hero-paragraph {
-  font-size: clamp(14px, 2vw, 22px);
+  font-size: clamp(14px, 2vw, 20px);
   line-height: 2;
   color: var(--text-primary);
   font-weight: 400;
@@ -246,14 +246,14 @@ iconify-icon {
     .hero-overlay-text-right {
         position: static;
         transform: none;
-        width: 85%; /* Se restaura el width para la vista móvil */
+        width: 85%; /
         max-width: 500px;
         text-align: center;
         top: auto;
         left: auto;
         right: auto;
         background-color: rgba(0, 0, 0, 0.1) !important;
-        padding: 24px; /* Restaurar padding para la vista móvil */
+        padding: 24px;
         border-radius: 12px;
         margin-top: 24px;
     }
